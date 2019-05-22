@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {LinearGradient} from 'expo';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
@@ -55,32 +55,13 @@ const weatherCases = {
     }
 };
 
-/*export default class Weather extends Component {
-    render() {
-        return (
-            <LinearGradient
-                colors={["#00c6fb", "#005bea"]}
-                style={styles.container}
-            >
-                <View style={styles.upper}>
-                    <Ionicons color='white' size={144} name='ios-rainy'/>
-                    <Text style={styles.temp}>35º</Text>
-                </View>
-                <View style={styles.lower}>
-                    <Text style={styles.title}>Raining like a MF</Text>
-                    <Text style={styles.subtitle}>For more info look outside</Text>
-                </View>
-            </LinearGradient>
-        )
-    }
-}*/
-
-function Weather({weatherName, temp}) {
+function Weather({weatherName, temp, localName}) {
     return (
         <LinearGradient colors={weatherCases[weatherName].colors} style={styles.container}>
             <View style={styles.upper}>
                 <MaterialCommunityIcons color='white' size={144} name={weatherCases[weatherName].icon}/>
                 <Text style={styles.temp}>{temp}º</Text>
+                <Text style={styles.local}>{localName}</Text>
             </View>
             <View style={styles.lower}>
                 <Text style={styles.title}>{weatherCases[weatherName].title}</Text>
@@ -111,6 +92,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         color: 'white',
         marginTop: 10
+    },
+    local: {
+        fontSize: 24,
+        backgroundColor: 'transparent',
+        color: 'white',
+        marginTop: 24
     },
     lower: {
         flex: 1,

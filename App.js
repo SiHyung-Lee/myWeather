@@ -9,7 +9,8 @@ export default class App extends Component {
         isLoaded: false,
         error: null,
         temperature: null,
-        name: null
+        name: null,
+        local: null
     };
 
     componentDidMount() {
@@ -32,18 +33,20 @@ export default class App extends Component {
                 this.setState({
                     temperature: json.main.temp,
                     name: json.weather[0].main,
+                    local: json.name,
                     isLoaded: true
                 });
+                console.log(json);
             });
     };
 
     render() {
-        const {isLoaded, error, temperature, name} = this.state;
+        const {isLoaded, error, temperature, name, local} = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true}/>
                 {isLoaded ? (
-                    <Weather weatherName={name} temp={Math.ceil(temperature - 273.15)}/>
+                    <Weather weatherName={name} localName={local} temp={Math.ceil(temperature - 273.15)}/>
                 ) : (
                     <View style={styles.loading}>
                         <Text style={styles.loadingText}>Getting the fucking weather</Text>
